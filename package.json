@@ -69,7 +69,9 @@
 		"prepare": "husky install",
 		"commit": "npm run test && cz",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build"
+		"build-storybook": "storybook build",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -91,5 +93,5 @@
 			"path": "./node_modules/cz-conventional-changelog"
 		}
 	},
-	"homepage": "./"
+	"homepage": "https://github.com/alsakharov/blog-customizer"
 }
