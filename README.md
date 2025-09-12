@@ -4,6 +4,7 @@
 
 ## Описание
 
+[Проект в Pages](https://alsakharov.github.io/blog-customizer/)
 [Макет проекта](https://www.figma.com/file/FEeiiGLOsE7ktXbPpBxYoD/Custom-dropdown?type=design&node-id=0%3A1&mode=design&t=eXRJnWC6Xsuw0qR4-1)
 
 Blog Customizer позволяет пользователям настраивать внешний вид статьи в реальном времени через удобную панель настроек. Вы можете изменять шрифт, его размер, цвета и ширину контента, а затем применять эти настройки к статье.
