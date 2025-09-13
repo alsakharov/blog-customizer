@@ -43,6 +43,7 @@ npm run stylelint
 Проверка JS/TS:  
 
 npm run lint
+
 Автоматическое форматирование кода:  
 
 npm run format
