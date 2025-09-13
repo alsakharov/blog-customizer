@@ -36,10 +36,9 @@ Blog Customizer позволяет пользователям настраива
 
 ## Инструменты разработки/отладки
 
-Проверка стилей:
-
-- npm run stylelint  
-  Проверка JS/TS:
-- npm run lint
-  Автоматическое форматирование кода:
-- npm run format
+Проверка стилей:  
+npm run stylelint
+Проверка JS/TS:  
+npm run lint
+Автоматическое форматирование кода:  
+npm run format
