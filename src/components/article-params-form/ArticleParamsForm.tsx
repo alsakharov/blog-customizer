@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent } from 'react';
 import { Button } from '../../ui/button';
 import { RadioGroup } from '../../ui/radio-group';
 import { Select } from '../../ui/select';
@@ -23,19 +23,34 @@ type ArticleParamsFormProps = {
 	onReset: () => void;
 };
 
+// Основной компонент-обертка, использующий key для пересоздания при изменении initialSettings
 export const ArticleParamsForm = ({
 	initialSettings,
 	onApply,
 	onReset,
 }: ArticleParamsFormProps) => {
+	// Используем ключ на основе initialSettings, чтобы принудительно пересоздать компонент
+	// при изменении начальных настроек вместо использования useEffect
+	return (
+		<ArticleParamsFormContent
+			key={JSON.stringify(initialSettings)}
+			initialSettings={initialSettings}
+			onApply={onApply}
+			onReset={onReset}
+		/>
+	);
+};
+
+// Внутренний компонент с локальным состоянием
+const ArticleParamsFormContent = ({
+	initialSettings,
+	onApply,
+	onReset,
+}: ArticleParamsFormProps) => {
 	// Состояние для хранения текущих настроек формы
+	// Инициализируется только один раз при создании компонента
 	const [formSettings, setFormSettings] =
 		useState<ArticleStateType>(initialSettings);
-
-	// Синхронизация с внешними настройками при их изменении
-	useEffect(() => {
-		setFormSettings(initialSettings);
-	}, [initialSettings]);
 
 	// Обработчики изменения настроек
 	const handleFontFamilyChange = (option: (typeof fontFamilyOptions)[0]) => {
@@ -82,7 +97,10 @@ export const ArticleParamsForm = ({
 	};
 
 	// Обработчик сброса формы
-	const handleReset = () => {
+	const handleReset = (e: FormEvent) => {
+		// Предотвращаем стандартное поведение браузера при сбросе формы
+		e.preventDefault();
+
 		// Сначала сбрасываем к дефолтным настройкам локально
 		setFormSettings({ ...defaultArticleState });
 
@@ -92,7 +110,7 @@ export const ArticleParamsForm = ({
 	};
 
 	return (
-		<form className={styles.form} onSubmit={handleSubmit}>
+		<form className={styles.form} onSubmit={handleSubmit} onReset={handleReset}>
 			<Text size={31} weight={800} uppercase>
 				Задайте параметры
 			</Text>
@@ -136,7 +154,7 @@ export const ArticleParamsForm = ({
 			/>
 
 			<div className={styles.bottomContainer}>
-				<Button title='Сбросить' type='clear' onClick={handleReset} />
+				<Button title='Сбросить' type='clear' htmlType='reset' />
 				<Button title='Применить' type='apply' htmlType='submit' />
 			</div>
 		</form>
